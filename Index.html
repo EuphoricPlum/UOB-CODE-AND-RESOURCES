@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Module Attendance</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f0f4f8; margin: 0; padding: 20px; }
+        .container { max-width: 500px; margin: auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        h1 { text-align: center; color: #333; }
+        label { display: block; margin-top: 20px; font-weight: bold; }
+        input[type="text"], select { width: 100%; padding: 10px; margin-top: 5px; border-radius: 4px; border: 1px solid #ccc; }
+        button { margin-top: 20px; width: 100%; padding: 10px; background-color: #28a745; border: none; color: white; font-size: 16px; border-radius: 4px; cursor: pointer; }
+        button:hover { background-color: #218838; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Module Attendance</h1>
+        <form method="POST">
+            <label for="module_name">Module Name:</label>
+            <select name="module_name" id="module_name">
+                {% for module in modules %}
+                    <option value="{{ module }}">{{ module }}</option>
+                {% endfor %}
+            </select>
+            <label for="module_name_new">Or Enter New Module Name:</label>
+            <input type="text" id="module_name_new" name="module_name_new" placeholder="Enter module name">
+            <button type="submit">Generate Attendance Code</button>
+        </form>
+    </div>
+
+    <script>
+        const moduleSelect = document.getElementById('module_name');
+        const moduleInput = document.getElementById('module_name_new');
+
+        moduleInput.addEventListener('input', function() {
+            if (moduleInput.value) {
+                moduleSelect.disabled = true;
+            } else {
+                moduleSelect.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>
